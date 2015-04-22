@@ -29,16 +29,18 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.pm.ParceledListSliceCompat;
-import android.support.v4.service.IMediaBrowserServiceCompat;
-import android.support.v4.service.IMediaBrowserServiceCompatCallbacks;
-import android.support.v4.service.MediaBrowserServiceCompat;
 import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.service.IMediaBrowserServiceCompat;
+import android.support.v4.service.IMediaBrowserServiceCompatCallbacks;
+import android.support.v4.service.MediaBrowserServiceCompat;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
@@ -528,12 +530,13 @@ public class MediaBrowserCompat {
 
         /** @hide */
         @IntDef(flag=true, value = { FLAG_BROWSABLE, FLAG_PLAYABLE })
+        @Retention(RetentionPolicy.SOURCE)
         public @interface Flags { }
 
         /**
          * Flag: Indicates that the item has children of its own.
          */
-        public static final int FLAG_BROWSABLE = 1 << 0;
+        public static final int FLAG_BROWSABLE = 1;
 
         /**
          * Flag: Indicates that the item is playable.
@@ -543,7 +546,7 @@ public class MediaBrowserCompat {
          * to start playing it.
          * </p>
          */
-        public static final int FLAG_PLAYABLE = 1 << 1;
+        public static final int FLAG_PLAYABLE = 2;
 
         /**
          * Create a new MediaItem for use in browsing media.
